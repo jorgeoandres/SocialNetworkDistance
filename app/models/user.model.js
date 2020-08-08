@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+//User schema of USER, just uses a username and has an ObjectID default value of mongodb. Following and followers
+//are and array of ids of users
 const UserSchema = mongoose.Schema({
     "username": {
         type: String,
@@ -13,6 +15,7 @@ const UserSchema = mongoose.Schema({
     timestamps: true
 });
 
+//user to follow another user.
 UserSchema.methods.follow = function(user) {
     if (this.following.indexOf(user._id) === -1) {
         this.following.push(user._id);

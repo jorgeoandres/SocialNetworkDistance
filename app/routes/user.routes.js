@@ -7,13 +7,13 @@ module.exports = (app) => {
     // Retrieve all Users
     app.get('/users', users.findAll);
 
-    // Retrieve a single User with user
+    // Retrieve a single User with username
     app.get('/users/:username', users.findOne);
 
-    // Update a User with user
+    // Update a User with userId
     app.put('/users/:userId', users.update);
 
-    // Delete a User with user
+    // Delete a User with userId
     app.delete('/users/:userId', users.delete);
 
     //Add list of follows

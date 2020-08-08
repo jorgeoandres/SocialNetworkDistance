@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const dbConfig = require('../config/database.config.js');
 mongoose.Promise = global.Promise;
 
+//this migration was only used to populate database in the first place. Code is delivered to you just for 
+// review purpose
 // Connecting to the database
 mongoose.connect(dbConfig.urlAdmin, {
     useUnifiedTopology: true,
@@ -37,4 +39,6 @@ db.once('open', function() {
             message: err.message || "Some error occurred while creating User database."
         });
     });
+
+    //FOLLOWING RELATIONS WERE CREATED USING REQUEST IN POSTMAN.
 });

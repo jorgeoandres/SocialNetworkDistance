@@ -1,10 +1,10 @@
 {
     "name": "socialNetworkpages",
     "version": "1.0.0",
-    "description": "Web API for simple content mananger. Construction and maintenance of web pages",
+    "description": "Web API for users. The main objective is to implement an algorithm that let us calculate the distance between two users considering the following relation as an edge in an unweighted graph.",
     "main": "server.js",
     "scripts": {
-        "test": "mocha ./test"
+        "test": "mocha ./test --timeout 10000 --exit"
     },
     "author": "@jorgeoandres",
     "license": "ISC",

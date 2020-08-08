@@ -7,7 +7,6 @@ const expect = chai.expect;
 
 const assert = require('assert');
 const User = require('../app/models/user.model.js');
-const Follower = require('../app/models/followers.model');
 const UserController = require('../app/controllers/user.controller.js');
 
 

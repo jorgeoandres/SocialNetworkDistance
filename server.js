@@ -21,7 +21,9 @@ const dbConfig = require('./config/database.config.js');
 mongoose.Promise = global.Promise;
 
 // Connecting to the database
-mongoose.connect(dbConfig.urlAdmin, {
+// using a user just with access to CRUD operations
+//admin user was used just because this is an exercise
+mongoose.connect(dbConfig.urlCommonUser, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
     useCreateIndex: true

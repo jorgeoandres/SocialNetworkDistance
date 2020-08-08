@@ -1,5 +1,4 @@
 const User = require('../models/user.model.js');
-const Follower = require('../models/followers.model');
 
 // Create and Save a new User
 exports.create = (req, res) => {
@@ -24,19 +23,19 @@ exports.create = (req, res) => {
         });
 };
 
-// Retrieve and return all notes from the database.
+// Retrieve and return all users from the database.
 exports.findAll = (req, res) => {
     User.find()
-        .then(notes => {
-            res.send(notes);
+        .then(users => {
+            res.send(users);
         }).catch(err => {
             res.status(500).send({
-                message: err.message || "Some error occurred while retrieving notes."
+                message: err.message || "Some error occurred while retrieving users."
             });
         });
 };
 
-// Find a single user with a user
+// Find a single user with a username
 exports.findOne = (req, res) => {
     User.findOne({ username: req.params.username }, function(err, user) {
         if (err) {
@@ -54,7 +53,7 @@ exports.findOne = (req, res) => {
     });
 };
 
-// Update a user identified by the user in the request
+// Update a user identified by the userId in the request
 exports.update = (req, res) => {
     // Validate Request
     if (!req.body.content) {
@@ -87,7 +86,7 @@ exports.update = (req, res) => {
         });
 };
 
-// Delete a user with the specified user in the request
+// Delete a user with the specified userId in the request
 exports.delete = (req, res) => {
     User.findByIdAndRemove(req.params.userId)
         .then(user => {
@@ -109,6 +108,7 @@ exports.delete = (req, res) => {
         });
 };
 
+//User follows another user
 exports.follow = (req, res, next) => {
     User.findOne({ username: req.params.username }, function(err, followee) {
         if (err) {
@@ -147,6 +147,7 @@ exports.follow = (req, res, next) => {
     });
 }
 
+//Get followers from a user with a given username
 exports.followers = (req, res) => {
     User.findOne({ username: req.params.username }, 'username followers').populate('following', 'username').exec(function(err, user) {
         if (err) {
@@ -164,6 +165,7 @@ exports.followers = (req, res) => {
     });
 }
 
+//Get followings from a user with a given username
 exports.following = (req, res) => {
     User.findOne({ username: req.params.username }, 'username following').populate('following', 'username').exec(function(err, user) {
         if (err) {
@@ -181,20 +183,24 @@ exports.following = (req, res) => {
     });
 }
 
+//help async function to get information of user with a given username
 async function getUser(username) {
     let result = await User.findOne({ username: username }).exec();
     return result;
 }
 
+//help async function to get an array of the users who a user follows with a given id
 async function getFollowings(id) {
     let result = await User.findOne({ _id: id }, "following").exec();
     return result.following;
 }
 
+//function that checks if the destination node (user) is on the list of followings
 function checkFollows(current_childs, destination) {
     return current_childs.includes(destination);
 }
 
+//algorithm to find distance between two users. To control the level of search maxLevel value is asked.
 async function BFS(origin, destination, maxLevel) {
     visited = []
     distance = 1;
@@ -240,6 +246,7 @@ async function BFS(origin, destination, maxLevel) {
     }
 }
 
+//method to find distance between two users. It looks a user as a node and the follow conecction as an edge of a unweighted graph. So it uses BFS to look for the distance
 exports.distance_between_users = (req, res) => {
     getUser(req.params.user1).then(function(origin) {
         getUser(req.params.user2).then(function(destination) {
