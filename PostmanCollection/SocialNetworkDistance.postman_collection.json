@@ -1,0 +1,103 @@
+{
+	"info": {
+		"_postman_id": "bb712267-6c25-460c-8c34-4b62f3240b0c",
+		"name": "SocialNetworkDistance",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Index",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000"
+			},
+			"response": []
+		},
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"userTest\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/users/"
+			},
+			"response": []
+		},
+		{
+			"name": "Get all users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000/users"
+			},
+			"response": []
+		},
+		{
+			"name": "Get distance from User to User",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"following\": [\"userB\", \"userD\",\"userE\", \"userG\"] \r\n} ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/users/distance/userA/userM"
+			},
+			"response": []
+		},
+		{
+			"name": "Get user by username",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000/users/userA"
+			},
+			"response": []
+		},
+		{
+			"name": "Follow user",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"userE\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/users/follow/userTest"
+			},
+			"response": []
+		},
+		{
+			"name": "Get followers by username",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000/users/following/userTest"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

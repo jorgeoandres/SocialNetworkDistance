@@ -31,7 +31,7 @@ mongoose.connect(dbConfig.urlCommonUser, {
     console.log("Successfully connected to the database");
     //SERVER
     socialNetwork.get('/', (req, res) => {
-        res.json({ "message": "Welcome to TrevorPages application. Take notes quickly. Save your web pages as easy as you can" });
+        res.json({ "message": "Welcome to SocialNetworkDistance application. Manage users and calculate distance between them" });
     });
 
     // listen for requests
