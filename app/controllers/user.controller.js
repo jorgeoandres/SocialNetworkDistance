@@ -1,6 +1,5 @@
 const User = require('../models/user.model.js');
 const Follower = require('../models/followers.model');
-//const UserServices = require('../services/user.service.js');
 
 // Create and Save a new User
 exports.create = (req, res) => {

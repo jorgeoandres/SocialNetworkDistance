@@ -27,6 +27,15 @@ mongoose.connect(dbConfig.urlAdmin, {
     useCreateIndex: true
 }).then(() => {
     console.log("Successfully connected to the database");
+    //SERVER
+    socialNetwork.get('/', (req, res) => {
+        res.json({ "message": "Welcome to TrevorPages application. Take notes quickly. Save your web pages as easy as you can" });
+    });
+
+    // listen for requests
+    socialNetwork.listen(3000, () => {
+        console.log("Server is listening on port 3000");
+    });
 }).catch(err => {
     console.log('Could not connect to the database. Exiting now...', err);
     process.exit();
@@ -37,12 +46,4 @@ mongoose.connect(dbConfig.urlAdmin, {
 require('./app/routes/user.routes.js')(socialNetwork);
 
 
-//SERVER
-socialNetwork.get('/', (req, res) => {
-    res.json({ "message": "Welcome to TrevorPages application. Take notes quickly. Save your web pages as easy as you can" });
-});
-
-// listen for requests
-socialNetwork.listen(3000, () => {
-    console.log("Server is listening on port 3000");
-});
+module.exports = socialNetwork
